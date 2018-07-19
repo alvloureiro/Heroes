@@ -1,11 +1,49 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="colorPrimary">@color/material_red_800</item>
+        <item name="colorPrimaryDark">@color/material_red_marvel</item>
+        <item name="colorAccent">@color/material_red_600</item>
+        <item name="dialogTheme">@style/AppTheme.Dialog.Red</item>
+        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert.Red</item>
+    </style>
+
+    <!-- Default Dialog Theme -->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    </style>
+
+    <style name="AppTheme.Dialog.Red">
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_a700</item>
+    </style>
+
+    <!-- Default Alert Dialog Theme -->
+    <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert">
+    </style>
+
+    <!-- red Alert Dialog Theme -->
+    <style name="AppTheme.Dialog.Alert.Red">
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_a700</item>
+    </style>
+
+    <style name="AppTheme.AppBar.Light" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+    <!-- Dark App Bar Theme -->
+    <style name="AppTheme.AppBar.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- Light Overlay Theme -->
+    <style name="AppTheme.Overlay.Light" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Dark Overlay Theme -->
+    <style name="AppTheme.Overlay.Dark" parent="ThemeOverlay.AppCompat.Dark" />
 </resources>
