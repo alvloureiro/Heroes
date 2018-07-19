@@ -22,6 +22,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_ENDPOINT', '"https://gateway.marvel.com"'
+        buildConfigField 'String', 'API_KEY', '"d93a5626a7de82704fab5ea9eb1ae003"'
+        buildConfigField 'String', 'TS', '"1"'
+        buildConfigField 'String', 'HASH', '"990bf4b530c58aca6b77d03326612d66"'
     }
     buildTypes {
         release {
