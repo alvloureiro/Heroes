@@ -2,18 +2,23 @@ package br.eng.alvloureiro.heroes.ui.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.transition.Explode
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.transition.Transition
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import br.eng.alvloureiro.heroes.R
 import br.eng.alvloureiro.heroes.extensions.*
 import br.eng.alvloureiro.heroes.network.data.Character
 import br.eng.alvloureiro.heroes.network.data.ResultData
+import br.eng.alvloureiro.heroes.network.data.dataModel.DataModel
 import br.eng.alvloureiro.heroes.ui.adapter.HeroListAdapter
 import br.eng.alvloureiro.heroes.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,16 +38,17 @@ class MainActivity : AppCompatActivity() {
 
     private var mDataCount = 0
 
-    private val mHeroListAdapter = HeroListAdapter {
+    private val mHeroListAdapter = HeroListAdapter { hero, sharedView ->
         Log.d("MainActivity", "Launch detail activity")
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, heroImage as View, "heroProfile")
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedView, ViewCompat.getTransitionName(sharedView))
         launch<DetailActivity>(options = options.toBundle()) {
-            putExtra(DetailActivity.MODEL_DATA, it)
+            putExtra(DetailActivity.MODEL_DATA, hero)
+            putExtra(DetailActivity.SHARED_TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
         }
     }
 
     private val success: (ResultData<Character>) -> Unit = { data ->
-        if (data.results.isNotEmpty()) {
+        if (data.results?.isNotEmpty()!!) {
             progressBar.hide()
             mHeroListAdapter.addHeroList(data.results)
             mMaxTotal = data.total ?: -1
