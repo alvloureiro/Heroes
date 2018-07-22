@@ -1,22 +1,20 @@
 package br.eng.alvloureiro.heroes.ui.viewmodel
 
-import android.util.Log
 import br.eng.alvloureiro.heroes.network.data.Character
+import br.eng.alvloureiro.heroes.network.data.ResultData
 import br.eng.alvloureiro.heroes.network.model.ApiModel
 import javax.inject.Inject
 
 
 class MainViewModel @Inject constructor(private val model: ApiModel): BaseViewModel() {
 
-    fun runGetHeroesList(success: (List<Character>) -> Unit, fail: (Throwable) -> Unit) {
+    fun runGetHeroesList(success: (ResultData<Character>) -> Unit, fail: (Throwable) -> Unit, offset: Int) {
         executeOnUITryCatch(
             {
-                val heroes = asyncAwait {
-                    model.charactereList(0)?.data?.results
-                }
-                heroes?.forEach {
-                    hero -> Log.d("MainViewModel", hero.name)
-                }
+                val data = asyncAwait {
+                    model.charactereList(offset)?.data
+                } ?: ResultData()
+                success(data)
             },
             {
                 fail(it)
