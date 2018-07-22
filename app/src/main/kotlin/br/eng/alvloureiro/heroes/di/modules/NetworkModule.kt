@@ -5,6 +5,8 @@ import br.eng.alvloureiro.heroes.BuildConfig.BASE_ENDPOINT
 import br.eng.alvloureiro.heroes.HeroesApplication
 import br.eng.alvloureiro.heroes.di.scopes.ApplicationScope
 import br.eng.alvloureiro.heroes.network.api.MarvelApi
+import br.eng.alvloureiro.heroes.network.interceptors.HttpCacheInterceptor
+import br.eng.alvloureiro.heroes.network.interceptors.HttpOfflineCacheInterceptor
 import br.eng.alvloureiro.heroes.network.interceptors.HttpQueryInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -37,7 +39,7 @@ class NetworkModule(private val app: HeroesApplication) {
     @ApplicationScope
     internal fun providesOkHttpClient(cache: Cache): OkHttpClient {
         return OkHttpClient.Builder()
-            //.addInterceptor(HttpOfflineCacheInterceptor(app))
+            .addInterceptor(HttpOfflineCacheInterceptor(app))
             .addInterceptor(HttpQueryInterceptor())
             .addInterceptor(HttpLoggingInterceptor()
                 .setLevel(
@@ -47,7 +49,7 @@ class NetworkModule(private val app: HeroesApplication) {
                         HttpLoggingInterceptor.Level.NONE
                     }
                 ))
-            //.addNetworkInterceptor(HttpCacheInterceptor())
+            .addNetworkInterceptor(HttpCacheInterceptor())
             .readTimeout(OKHTTP_READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
             .writeTimeout(OKHTTP_WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
             .cache(cache)
