@@ -18,6 +18,6 @@ data class ResultData<T>(
     var count: Int? = null,
 
     @Expose
-    var results: List<T> = mutableListOf()
+    var results: MutableList<T>? = null
 ): Serializable
 

@@ -8,5 +8,5 @@ class ApiModel @Inject constructor(private val mApi: MarvelApi) {
 
     fun charactereList(offset: Int) = mApi.getCharacters(offset).execute().body()
 
-    fun comicDetails(url: String) = mApi.getComicDetail2(url).execute().body()
+    fun entityDetails(url: String) = mApi.getEntityDetail(url).execute().body()
 }
