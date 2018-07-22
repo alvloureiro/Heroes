@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Heroes</string>
+    <string name="label_button_refetch">Refetch Data</string>
+    <string name="label_hero_name">%s</string>
+    <string name="label_toast_reach_end_list_text">You reach the end of the list</string>
 </resources>
