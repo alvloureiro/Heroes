@@ -21,4 +21,18 @@ class MainViewModel @Inject constructor(private val model: ApiModel): BaseViewMo
             }
         )
     }
+
+    fun searchSuperHero(superHeroName: String, success: (ResultData<Character>) -> Unit, fail: (Throwable) -> Unit) {
+        executeOnUITryCatch(
+            {
+                val results = asyncAwait {
+                    model.searchSuperHeroByName(superHeroName)?.data ?: ResultData()
+                }
+                success(results)
+            },
+            { throwable ->
+                fail(throwable)
+            }
+        )
+    }
 }

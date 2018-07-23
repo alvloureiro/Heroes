@@ -23,7 +23,7 @@
                 android:layout_height="25dp"
                 android:background="?attr/colorPrimary"/>
 
-            <Toolbar
+            <android.support.v7.widget.Toolbar
                 android:id="@+id/mainToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"

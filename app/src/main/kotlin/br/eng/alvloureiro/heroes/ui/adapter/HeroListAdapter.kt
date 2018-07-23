@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.hero_listitem.view.*
 
 
 class HeroListAdapter(listener: (Character, AppCompatImageView) -> Unit): RecyclerView.Adapter<HeroListAdapter.HeroViewHolder>() {
-    private var mCharacterList: MutableList<Character> = mutableListOf()
+    private var mCharacterList: MutableSet<Character> = mutableSetOf()
     private val mListener: (Character, AppCompatImageView) -> Unit = listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
@@ -23,20 +23,24 @@ class HeroListAdapter(listener: (Character, AppCompatImageView) -> Unit): Recycl
     override fun getItemCount(): Int = mCharacterList.size
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
-        holder.bind(mCharacterList.get(position), mListener)
+        holder.bind(mCharacterList.elementAt(position), mListener)
     }
 
     fun addHeroList(heroes: List<Character>?) {
         var initPosition = 0
         if (mCharacterList.isNotEmpty()) {
-            initPosition = mCharacterList.lastIndex.plus(1)
+            initPosition = mCharacterList.size.plus(1)
         }
 
         heroes?.let {
-            mCharacterList.plusAssign(it)
+            mCharacterList.addAll(it)
         }
 
         notifyItemRangeChanged(initPosition, mCharacterList.size.plus(1))
+    }
+
+    fun disposeHeroList() {
+        mCharacterList.clear()
     }
 
     class HeroViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -6,4 +6,6 @@
     <string name="label_entity_title">%s</string>
     <string name="label_entity_description">%s</string>
     <string name="label_no_entity_data">No Entity Data</string>
+    <string name="label_search_hint">Search your favorite super hero</string>
+    <string name="search_title">Search Super Hero</string>
 </resources>
